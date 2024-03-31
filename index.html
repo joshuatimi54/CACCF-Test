@@ -81,6 +81,13 @@
     text-align: center;
     font-weight: 900 !important;
   }
+  form div:nth-child(40)::after {
+    content: "MTS 101";
+    color: red;
+    font-size: 20PX;
+    text-align: center;
+    font-weight: 900 !important;
+  }
   #question {
     margin-bottom: 10px;
   }
@@ -311,11 +318,61 @@ const questions = [
     question: "Which of the following reading habits should be avoided?",
     options: ["A. carefully concentrating on every word as you read", "B. making equal use of the two types of eye movement in reading", "C. not using a pen to trace each word but using a finger instead", "D. varying your reading speed"],
     answer: "D. varying your reading speed"
+  },
+  {
+    question: "In a senior secondary school, 80 students play hockey or football. The number that play football is 5 more than twice the number that play Hockey. If 15 students play both games and every student in the school plays at least one game. Find the number of students that play Football but not Hockey.",
+    options: ["[a] 20", "[b] 30", "[c] 40", "[d] 50"],
+    answer: "[b] 30"
+  },
+  {
+    question: "Using binomial theorem, obtain the expansion of (1 + 3x) 6 + (1 – 3x)6, simplifying all the terms.",
+    options: ["[a] 2 – 270x² + 2430x⁴ + 1458x⁶", "[b] 2 + 270x² + 2430x⁴ - 1458x⁶", "[c] 2 – 270x² + 2430x⁴ - 1458x⁶", "[d] 2 + 270x² + 2430x⁴ + 1458x⁶"],
+    answer: "[a] 2 – 270x² + 2430x⁴ + 1458x⁶"
+  },
+  {
+    question: "Using binomial expansion of (1 +¼x)⁶. Evaluate (1.0025)⁶ correct to 5 s.f.",
+    options: ["[a] 1.015094", "[b] 1.01509", "[c] 1.01510", "[d] 1.01500"],
+    answer: "[c] 1.01510"
+  },
+  {
+    question: "Expand (2 + x)⁵(1 – 2x)⁶ as far as the term in x³",
+    options: ["[a] 32 – 304x – 2960x² – 5800x⁴", "[b] 32 + 304x + 2960x² + 5800x⁴", "[c] 32 – 304x + 2960x² + 5800x⁴", "[d] 32 – 304x + 2960x² – 5800x⁴"],
+    answer: "[a] 32 – 304x – 2960x² – 5800x⁴"
+  },
+  {
+    question: "Solve 1+6+11+16+……+x =783",
+    options: ["[a] 86", "[b] 68", "[c] 90", "[d] 84"],
+    answer: "[a] 86"
+  },
+  {
+    question: "Solve 1+X+X²+X³+…….X¹¹ = x-3+x¹²/(x-1)",
+    options: ["[a]2±√2", "[b]-2±√2", "[c]1±√2", "[d]-1±√2"],
+    answer: "[c]1±√2"
+  },
+  {
+    question: "Divide a³x – 26a²x + 156ax – 216 by a²x - 24ax + 108.",
+    options: ["[a] ax+2", "[b] ax – 2", "[c] ax + 3", "[d] ax – 3"],
+    answer: "[d] ax – 3"
+  },
+  {
+    question: "If x² + 2x – 3 is a factor of a polynomial f(x)= 2x³ + 9x² +mx + n, where m and n are constants, factorise f(x) completely.",
+    options: ["[a] (x-3)(x-1)(2x+5)", "[b] (x+1)(x+3)(2x-5)", "[c] (x+3)(x-1)(2x+5)", "[d] (x+3)(x+1)(2x+5)"],
+    answer: "[a] (x-3)(x-1)(2x+5)"
+  },
+  {
+    question: "Given that x² – 6x + 8=0, its root is twice the other, form a quadratic equation whose roots are (3α – β)/(3β – α) and (3α + β)/(3β + α)",
+    options: ["[a] 35x²+32x+5=0", "[b] 35x²-32x+5=0", "[c] 35x²-32x-5=0", "[d] 35x²+32x-5=0"],
+    answer: "[a] 35x²+32x+5=0"
+  },
+  {
+    question: "Determine the nature of the root of the equation 2/(√3) x^2-[1+3/(√2)]x+5=0",
+    options: ["[a] real and equal", "[b] real and distinct", "[c] imaginary", "[d] cannot be determined"],
+    answer: "[b] real and distinct"
   }
 ];
 
 let countdownTimer;
-let timeLeft = 60 * 60; // 50 minutes in seconds
+let timeLeft = 50 * 60; // 50 minutes in seconds
 
 function displayQuestions() {
   const questionsElem = document.getElementById('questions');
