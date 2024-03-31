@@ -43,8 +43,43 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  #questions {
+  form {
     margin-top: 50px;
+  }
+  form .data {
+    font-size: large;
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  form div:nth-child(1)::before {
+    content: "PHY 101";
+    color: red;
+    font-size: 20PX;
+    text-align: center;
+    font-weight: 900 !important;
+  }
+  form div:nth-child(10)::after {
+    content: "BIO 101";
+    color: red;
+    font-size: 20PX;
+    text-align: center;
+    font-weight: 900 !important;
+  }
+  form div:nth-child(20)::after {
+    content: "CHE 101";
+    color: red;
+    font-size: 20PX;
+    text-align: center;
+    font-weight: 900 !important;
+  }
+  form div:nth-child(30)::after {
+    content: "GNS 101";
+    color: red;
+    font-size: 20PX;
+    text-align: center;
+    font-weight: 900 !important;
   }
   #question {
     margin-bottom: 10px;
@@ -66,6 +101,10 @@
 
 <div id="question-container">
   <form id="test-form">
+    <h3>Student details <span style="color: red;">*</span></h3>
+    <input type="text" class="data" id="first-name" name="first-name" placeholder="First Name" required>
+    <input type="text" class="data" id="last-name" name="last-name" placeholder="Last Name" required>
+    <input type="email" class="data" id="email" name="email" placeholder="Email" required>
     <div id="questions">
     </div>
   </form>
@@ -222,11 +261,61 @@ const questions = [
     question: "Inert gases possess the most stable electronic configuration as they contain.",
     options: ["(a.) Fully filled outermost shell", "(b.) Half filled outermost shell", "(c.) Two electrons in the outermost shell", "(d.) Eight electrons in the outermost shell"],
     answer: "(a.) Fully filled outermost shell"
+  },
+  {
+    question: "The sentence that bears the main information in a paragraph is known as the",
+    options: ["A. introduction sentence", "B. main point sentence", "C. topic sentence", "D. all of the above"],
+    answer: "C. topic sentence"
+  },
+  {
+    question: "Reading is important for all these except---.",
+    options: ["A. achievement and advancement in life", "B. enjoyment or leisure", "C. professional development", "D. none of the above"],
+    answer: "D. none of the above"
+  },
+  {
+    question: "All these are strategies of reading except---.",
+    options: ["A. anticipation", "B. skimming", "C. scamming", "D. identifying main ideas and supporting details"],
+    answer: "C. scamming"
+  },
+  {
+    question: "Efficient reading is enhanced by these factors except---.",
+    options: ["A. environmental factors", "B. physiological factors", "C. physiognomical factors", "D. psychological factors"],
+    answer: "C. physiognomical factors"
+  },
+  {
+    question: "Visual impairment is an example of --- factors that affect reading.",
+    options: ["A. Psychological", "B. Physiological", "C. Environmental", "D. Technical"],
+    answer: "B. Physiological"
+  },
+  {
+    question: "Which of these is not recommended for efficient reading?",
+    options: ["A. reading with pre-conceived ideas in mind", "B. generation of guide questions as you read", "C. adopting a flexible reading speed", "D. employing memory enhancing devices"],
+    answer: "A. reading with pre-conceived ideas in mind"
+  },
+  {
+    question: "One of these is NOT a factor that cause slow reading---.",
+    options: ["A. word- by -word reading", "B. difficulty with the return sweep", "C. flexibility", "D. regression"],
+    answer: "C. flexibility"
+  },
+  {
+    question: "All these are instances of skimming except---.",
+    options: ["A. going through a passage rapidly in order to search for specific information", "B. determining a text's main ideas", "C. looking out for the topic sentences", "D. run through a text rapidly to determine its main ideas"],
+    answer: "A. going through a passage rapidly in order to search for specific information"
+  },
+  {
+    question: "The function of the word FURTHERMORE in this sentence: ‘furthermore, we will examine these details’ is---.",
+    options: ["A. Listing", "B. Transition", "C. Addition", "D. Summary"],
+    answer: "C. Addition"
+  },
+  {
+    question: "Which of the following reading habits should be avoided?",
+    options: ["A. carefully concentrating on every word as you read", "B. making equal use of the two types of eye movement in reading", "C. not using a pen to trace each word but using a finger instead", "D. varying your reading speed"],
+    answer: "D. varying your reading speed"
   }
 ];
 
 let countdownTimer;
-let timeLeft = 55 * 60; // 50 minutes in seconds
+let timeLeft = 60 * 60; // 50 minutes in seconds
 
 function displayQuestions() {
   const questionsElem = document.getElementById('questions');
