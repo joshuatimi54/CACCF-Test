@@ -430,6 +430,14 @@ function stopTimer() {
 function submitTest() {
   const formData = new FormData(document.getElementById('test-form'));
   const responses = {};
+  const firstName = formData.get('first-name');
+  const lastName = formData.get('last-name');
+  const email = formData.get('email');
+
+  // Add first name, last name, and email to the responses
+  responses.firstName = firstName;
+  responses.lastName = lastName;
+  responses.email = email;
 
   questions.forEach((question, index) => {
     const selectedOption = formData.get(`option-${index}`);
