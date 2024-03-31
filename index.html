@@ -449,6 +449,10 @@ function submitTest() {
     }
   });
 
+  // Display a popup message
+  const message = 'Test responses submitted successfully!';
+  alert(message);
+
   // Here, you would send the responses as a single JSON object to the webhook
   const webhookUrl = 'https://hook.us1.make.com/jhxfcy6j8xntqg9hjo5hpil36gzxtkny';
   fetch(webhookUrl, {
@@ -463,14 +467,18 @@ function submitTest() {
       throw new Error('Failed to send test responses');
     }
     console.log('Test responses sent successfully');
-    // Redirect to thank you page
-    window.location.href = 'thank-you.html';
   })
   .catch(error => {
     console.error('Error sending test responses:', error.message);
     // Handle error if necessary
   });
+
+  // Refresh the page after 3 seconds
+  setTimeout(() => {
+    location.reload();
+  }, 300);
 }
+
 
 document.getElementById('submit').addEventListener('click', () => {
   submitTest();
