@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer-Based Test</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  #header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+  }
+  #timer {
+    font-size: 20px;
+  }
+  #submit {
+    font-size: 16px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #question-container {
+    margin-top: 60px; /* Adjust for the height of the header */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #questions {
+    margin-top: 50px;
+  }
+  #question {
+    margin-bottom: 10px;
+  }
+  #options {
+    list-style-type: none;
+    padding: 0;
+  }
+  #options li {
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+<div id="header">
+  <div id="timer">Time Left: <span id="time-left"></span></div>
+  <button id="submit">Submit</button>
+</div>
+
+<div id="question-container">
+  <form id="test-form">
+    <div id="questions">
+    </div>
+  </form>
+</div>
+
+<script>
+const questions = [
+  {
+    question: "Which of the following is the correct combination of dimensions for energy?",
+    options: ["(a) MLT", "(b) LT²/M", "(c) ML²/T²", "(d) M²L³T"],
+    answer: "(b) LT²/M"
+  },
+  {
+    question: "The velocity V of a transverse wave along a stretched string depends on the stress (P), the density (D) of the material and the length (L). Find the value of x, y and z in the equation V=KPx Dy Lz, where K is a dimensional constant.",
+    options: ["(a) x=1, y= 2, z=3", "(b) x= ½, y= -½, z= 0", "(c) x=1, y=2, z=½", "(d) x=1, y= 0, z= 3"],
+    answer: "(a) x=1, y= 2, z=3"
+  },
+  {
+    question: "The pair of physical quantities that are scalar only are:",
+    options: ["(a) Volume and area", "(b) Moment and Momentum", "(c) Light and Displacement", "(d) None of the above"],
+    answer: "(a) Volume and area"
+  },
+  {
+    question: "Suppose A= Bn Cm where A has dimension ‘LT’, B has dimension ‘L2 T-1‘ and C has dimension LT2. What is the value of n?",
+    options: ["(a) ⅔", "(b) 2", "(c) ⅕", "(d) ⅘"],
+    answer: "(c) ⅕"
+  },
+  {
+    question: "The Velocity of the transvers waves in a string is given by V= KFx Uy, where K is a constant, F is the tension in the string, U is the mass per unit length of the string. The value of x and y are:",
+    options: ["(a) 2 and 4", "(b) -½ and ½", "(c) ½ and -½", "(d) 2 and ½"],
+    answer: "(a) 2 and 4"
+  },
+  {
+    question: "Suppose two vectors are given as A= 10i + 3j + 7k and B= 6i – 9j + 4k. find the magnitude of the sum C= 4A + 3B, using unit vector.",
+    options: ["(a) 58i – 39j + 40k", "(b) 58i – 39j + 16k", "(c) 22i – 15j + 40k", "(d) 58i – 15j + 40k"],
+    answer: "(b) 58i – 39j + 16k"
+  },
+  {
+    question: "Given the two displacement D= 6i + 3j – k and E= 4i - 5j + 8k. Find the magnitude of the difference of the displacement 3D – E, using unit vector.",
+    options: ["(a) 14i + 14j – 11k", "(b) 22i + 14j – 11k", "(c) 14i – 11k", "(d) 22i + 4j +11k"],
+    answer: "(a) 14i + 14j – 11k"
+  },
+  {
+    question: "If force F= 2i + 3k and distance d= 4i – 2j +2k. Find the workdone W= F.d",
+    options: ["(a) 12j", "(b) 14j", "(c) 10j", "(d) 17j"],
+    answer: "(b) 14j"
+  },
+  {
+    question: "If P= 3i + 4j – 6j and O= 4i + 5k. Find P X Q.",
+    options: ["(a) 20i – 9j – 16k", "(b) 30i + 24j – 3k", "(c) 30i – 39j – 16k", "(d) 20i – 39j + 16k"],
+    answer: "(a) 20i – 9j – 16k"
+  },
+  {
+    question: "If vector A and B are given as (2i + 4j) and (5j + 3k) respectively. Find A X B.",
+    options: ["(a) 12i + 6j – 10k", "(b) 12i – 6j + 10k", "(c) 12i – 6j – 10k", "(d) 12i – 6j + 10k"],
+    answer: "(a) 12i + 6j – 10k"
+  },
+  {
+    question: "The word 'cell' comes from the -------- word, --------",
+    options: ["(a.) Latin, cellular", "(b.) Greek, cellulus", "(c.) Latin, cellullar", "(d.) French, cellulus"],
+    answer: "(a.) Latin, cellular"
+  },
+  {
+    question: "------- refers to the study of the internal structure of living things",
+    options: ["(a.) Cytology", "(b.) Morphology", "(c.) Anatomy", "(d.) Physiology"],
+    answer: "(a.) Cytology"
+  },
+  {
+    question: "The first optical microscope was invented in what century?",
+    options: ["(a.) 18th", "(b.) 15th", "(c.) 17th", "(d.) 18th"],
+    answer: "(c.) 17th"
+  },
+  {
+    question: "The correct sequence from the most to the least of the taxonomic level listed here is.....",
+    options: ["(a.) Family, phylum, class, order, species and genus", "(b.) Kingdom, phylum, class, order, family, genus and species", "(c.) Phylum, kingdom, family, class, order, species and genus", "(d.) Kingdom, phylum, order, class, family, genus and species."],
+    answer: "(b.) Kingdom, phylum, class, order, family, genus and species"
+  },
+  {
+    question: "Example of organism which shows colonial organization is .....",
+    options: ["(a.) Amoeba", "(b.) Euglena", "(c.) Paramecium", "(d.) Volvox"],
+    answer: "(d.) Volvox"
+  },
+  {
+    question: "DNA is found in",
+    options: ["(a.) Chloroplast", "(b.) Endoplasmic reticulum", "(c.) Ribosomes", "(d.) Nucleus"],
+    answer: "(d.) Nucleus"
+  },
+  {
+    question: "Prokaryotic cells does not have",
+    options: ["(a.) Cell wall", "(b.) Nuclear membrane", "(c.) Cytoplasm", "(d.) Plasma membrane"],
+    answer: "(b.) Nuclear membrane"
+  },
+  {
+    question: "The protein coat of virus is called",
+    options: ["(a.) Nucleid", "(b.) Capsid", "(c.) Capsomere", "(d.) Outer envelope"],
+    answer: "(b.) Capsid"
+  },
+  {
+    question: "Who is the father of modern biology classification",
+    options: ["(a.) Carolus Linnaeus", "(b.) Whittaker", "(c.) Aristotle", "(d.) John Haeckel"],
+    answer: "(a.) Carolus Linnaeus"
+  },
+  {
+    question: "Which group contain organisms that are unicellular and prokaryotic",
+    options: ["(a.) Eukaryotic", "(b.) Fungi", "(c.) Plants", "(d.) Bacteria"],
+    answer: "(d.) Bacteria"
+  },
+  {
+    question: "Who proposed the plum pudding model of the atom, suggesting that electrons were embedded in a positively charged sphere?",
+    options: ["(a.) Niels Bohr", "(b.) Ernest Rutherford", "(c.) J.J. Thomson", "(d.) Marie Curie"],
+    answer: "(c.) J.J. Thomson"
+  },
+  {
+    question: "Which subatomic particle has a charge of +1 and is located in the nucleus of an atom?",
+    options: ["(a.) Neutron", "(b.) Proton", "(c.) Electron", "(d.) Positron"],
+    answer: "(b.) Proton"
+  },
+  {
+    question: "The nucleus of an atom contains ____ and ____",
+    options: ["(a.) Electrons, Neutrons", "(b.) Protons, Electrons", "(c.) Neutrons, Electrons", "(d.) Protons, Neutrons"],
+    answer: "(d.) Protons, Neutrons"
+  },
+  {
+    question: "Which of the following statements about isotopes is true?",
+    options: ["(a.) Isotopes have the same number of protons but different numbers of neutrons", "(b.) Isotopes have the same number of neutrons but different numbers of protons", "(c.) Isotopes have the same number of electrons but different numbers of protons", "(d.) Isotopes have the same number of protons and neutrons"],
+    answer: "(a.) Isotopes have the same number of protons but different numbers of neutrons"
+  },
+  {
+    question: "What is the mass number of an atom equal to?",
+    options: ["(a.) The number of electrons", "(b.) The number of neutrons", "(c.) The sum of protons and neutrons", "(d.) The number of protons"],
+    answer: "(c.) The sum of protons and neutrons"
+  },
+  {
+    question: "Which type of radiation consists of helium nuclei and is the least penetrating?",
+    options: ["(a.) Alpha radiation", "(b.) Beta radiation", "(c.) Gamma radiation", "(d.) Delta radiation"],
+    answer: "(a.) Alpha radiation"
+  },
+  {
+    question: "The Principal quantum number is related to the?",
+    options: ["(a.) Orbital angular momentum", "(b.) Size and shape of the orbital", "(c.) Orientation of the orbital", "(d.) Average size of the orbital"],
+    answer: "(d.) Average size of the orbital"
+  },
+  {
+    question: "Generally speaking, the ionisation energies increase when we move",
+    options: ["(a.) From left to right in the periodic table", "(b.) From top to bottom in a group", "(c.) From right to left in the periodic table", "(d.) None of these"],
+    answer: "(a.) From left to right in the periodic table"
+  },
+  {
+    question: "Half-life is the time required for __ of the radioactive nuclei in a sample to decay into a more stable form.",
+    options: ["(a.) One-fourth", "(b.) One-half", "(c.) Three-fourths", "(d.) None of the above"],
+    answer: "(b.) One-half"
+  },
+  {
+    question: "Inert gases possess the most stable electronic configuration as they contain.",
+    options: ["(a.) Fully filled outermost shell", "(b.) Half filled outermost shell", "(c.) Two electrons in the outermost shell", "(d.) Eight electrons in the outermost shell"],
+    answer: "(a.) Fully filled outermost shell"
+  }
+];
+
+let countdownTimer;
+let timeLeft = 55 * 60; // 50 minutes in seconds
+
+function displayQuestions() {
+  const questionsElem = document.getElementById('questions');
+  
+  questions.forEach((question, index) => {
+    const questionElem = document.createElement('div');
+    questionElem.innerHTML = `<h3>${index + 1}. ${question.question}</h3>`;
+    
+    const optionsElem = document.createElement('ul');
+    question.options.forEach((option, optionIndex) => {
+      const li = document.createElement('li');
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = `option-${index}`;
+      radio.value = option;
+      li.appendChild(radio);
+      
+      const label = document.createElement('label');
+      label.textContent = option;
+      li.appendChild(label);
+      
+      optionsElem.appendChild(li);
+    });
+    
+    questionElem.appendChild(optionsElem);
+    questionsElem.appendChild(questionElem);
+  });
+}
+
+function updateTimer() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  document.getElementById('time-left').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function startTimer() {
+  updateTimer();
+  countdownTimer = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(countdownTimer);
+      submitTest();
+    } else {
+      timeLeft--;
+      updateTimer();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(countdownTimer);
+  timeLeft = 50 * 60;
+  updateTimer();
+}
+
+function submitTest() {
+  const formData = new FormData(document.getElementById('test-form'));
+  const responses = {};
+
+  questions.forEach((question, index) => {
+    const selectedOption = formData.get(`option-${index}`);
+    if (selectedOption) {
+      responses[`question-${index + 1}`] = {
+        question: question.question,
+        answer: selectedOption
+      };
+    }
+  });
+
+  // Here, you would send the responses as a single JSON object to the webhook
+  const webhookUrl = 'https://hook.us1.make.com/jhxfcy6j8xntqg9hjo5hpil36gzxtkny';
+  fetch(webhookUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(responses)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to send test responses');
+    }
+    console.log('Test responses sent successfully');
+    // Redirect to thank you page
+    window.location.href = 'thank-you.html';
+  })
+  .catch(error => {
+    console.error('Error sending test responses:', error.message);
+    // Handle error if necessary
+  });
+}
+
+document.getElementById('submit').addEventListener('click', () => {
+  submitTest();
+});
+
+displayQuestions();
+startTimer();
+</script>
+</body>
+</html>
